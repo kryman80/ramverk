@@ -1,5 +1,5 @@
 <h2>Validation result</h2>
 
 <p>
-    Ip: <?= $ip; ?> Result: <?= $res; ?>
+    <span style="color: <?= $result ? "green" : "red" ?>">Ip: <?= $ip; ?></span>
 </p>

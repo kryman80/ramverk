@@ -49,13 +49,24 @@ class IPValidatorController implements ContainerInjectableInterface
         $page->add("ip/index");
         
         if ($this->diRequest->getGet("ip-address")) {
-            $ipAddress = $this->diRequest->getGet("ip-address");
+            $result = null;
 
-            $result = preg_match("/^[0-255]/", $ipAddress);
+            $ipAddress = $this->diRequest->getGet("ip-address");
+            
+            foreach (explode(".", $ipAddress) as $value) {
+                $value = (int) $value;
+                
+                if ($value > 255) {
+                    $result = false;                    
+                }
+            }
+
+            var_dump($result);
+            $result = is_null($result) ? preg_match("/^[1-9]+\.\d+\.\d+\.\d+/", $ipAddress) : false;
 
             $data = [
                 "ip" => $ipAddress,
-                "res" => $result,
+                "result" => $result,
             ];
 
             $page->add("ip/validation", $data);
