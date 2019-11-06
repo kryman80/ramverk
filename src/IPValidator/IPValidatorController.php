@@ -49,21 +49,44 @@ class IPValidatorController implements ContainerInjectableInterface
         $page->add("ip/index");
         
         if ($this->diRequest->getGet("ip-address")) {
-            $result = null;
+            $result = null; $ip4 = false; $ip6 = false;
 
             $ipAddress = $this->diRequest->getGet("ip-address");
-            
-            foreach (explode(".", $ipAddress) as $value) {
-                $value = (int) $value;
-                
-                if ($value > 255) {
-                    $result = false;                    
+
+            strlen($ipAddress) < 32 ? $ip4 = true : $ip6 = true;
+
+            if ($ip4) {
+                foreach (explode(".", $ipAddress) as $value) {
+                    if (strlen($value) > 3) {
+                        $result = false;
+                        break;
+                    }
+    
+                    $value = (int) $value;
+                    
+                    if ($value > 255) {
+                        $result = false;
+                        break;
+                    }
+                }
+            } else if ($ip6) {
+                foreach (explode(":", $ipAddress) as $value) {
+                    if (strlen($value) > 4) {
+                        $result = false;
+                        break;
+                    }
                 }
             }
+            
+            if (is_null($result)) {
+                $ip6PattDigitAFaf = "[0-9]";
+                
+                $result = $ip4 ? preg_match("/^[1-9]+\.\d+\.\d+\.\d+/", $ipAddress)
+                : ($ip6 ? "truee" : false);
 
-            var_dump($result);
-            $result = is_null($result) ? preg_match("/^[1-9]+\.\d+\.\d+\.\d+/", $ipAddress) : false;
-
+                var_dump($ip4, $ip6, $result);
+            }            
+            
             $data = [
                 "ip" => $ipAddress,
                 "result" => $result,
