@@ -70,26 +70,34 @@ class IPValidatorController implements ContainerInjectableInterface
                     }
                 }
             } else if ($ip6) {
-                foreach (explode(":", $ipAddress) as $value) {
-                    if (strlen($value) > 4) {
-                        $result = false;
-                        break;
+                $ip6AddressArray = explode(":", $ipAddress);
+
+                if (count($ip6AddressArray) != 8) {
+                    $result = false;
+                } else {
+                    foreach ($ip6AddressArray as $value) {
+                        if (strlen($value) != 4) {
+                            $result = false;
+                            break;
+                        }
                     }
                 }
             }
             
             if (is_null($result)) {
-                $ip6PattDigitAFaf = "[0-9]";
+                $ip6P = "[0-9A-Fa-f]";
                 
                 $result = $ip4 ? preg_match("/^[1-9]+\.\d+\.\d+\.\d+/", $ipAddress)
-                : ($ip6 ? "truee" : false);
-
-                var_dump($ip4, $ip6, $result);
+                : ($ip6 ? preg_match(
+                    "/^$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+/", $ipAddress
+                    ) : false);
             }            
             
             $data = [
                 "ip" => $ipAddress,
                 "result" => $result,
+                "ip4" => strpos($ipAddress, "."),
+                "hostname" => gethostbyaddr($ipAddress),
             ];
 
             $page->add("ip/validation", $data);
