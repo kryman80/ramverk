@@ -49,5 +49,10 @@ return [
             "url" => "ip",
             "title" => "Validera en ip adress."
         ],
+        [
+            "text" => "API IP validering",
+            "url" => "api_ip",
+            "title" => "Validera en ip adress genom ett API."
+        ],
     ],
 ];
