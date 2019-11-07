@@ -29,7 +29,7 @@ class IPValidatorController implements ContainerInjectableInterface
      */
     public function initialize() : void
     {
-        $this->diPage = $this->di->page;
+        $this->diPage = $this->di->get("page");
         $this->diRequest = $this->di->get("request");
     }
 
@@ -49,7 +49,7 @@ class IPValidatorController implements ContainerInjectableInterface
 
         $page->add("ip/index");
                 
-        if ($this->diRequest->getGet("ip-address")) {            
+        if ($this->diRequest->getGet("ip-address")) {                        
             $ipAddress = $this->diRequest->getGet("ip-address");
             
             $result = checkWhichIp($ipAddress);
