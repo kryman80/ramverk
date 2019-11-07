@@ -71,4 +71,17 @@ class APIIPValidatorController implements ContainerInjectableInterface
             "title" => "Validate an IP via API.",
         ]);
     }
+
+    public function jsonAction()
+    {        
+        $req = $this->diReq->getGet("ip4") ?? $this->diReq->getGet("ip6") ?? false;
+        
+        if (!$req) {            
+            return [ ["error" => "Check your parameters."] ];
+        }
+
+        $res = [ "ip4" => $this->diReq->getGet("ip4"), "ip6" => $this->diReq->getGet("ip6") ];
+
+        return [$res];
+    }
 }
