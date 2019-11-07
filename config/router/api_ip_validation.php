@@ -6,7 +6,7 @@ return [
     "routes" => [
         [
             "info" => "API IP validator.",
-            "mount" => "ip",
+            "mount" => "api",
             "handler" => "\Anax\IPValidator\APIIPValidatorController",
         ],
     ],

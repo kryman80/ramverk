@@ -50,7 +50,7 @@ return [
         ],
         [
             "text" => "API IP validering",
-            "url" => "ip/api",
+            "url" => "api",
             "title" => "Validera en ip adress genom ett API."
         ],
     ],
