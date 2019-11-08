@@ -28,7 +28,7 @@ class APIIPValidatorController implements ContainerInjectableInterface
      */
     public function initialize()
     {
-        $this->diPage = $this->di->page;
+        $this->diPage = $this->di->get("page");
         $this->diReq = $this->di->get("request");
     }
 
