@@ -45,7 +45,7 @@ class IPValidatorControllerTest extends TestCase
      */
     public function testInitialize()
     {
-        $this->assertNull($this->controller->initialize());        
+        $this->assertNull($this->controller->initialize());
     }
 
     /**
@@ -54,7 +54,7 @@ class IPValidatorControllerTest extends TestCase
 
     public function testIndexAction()
     {
-        $res = $this->controller->indexAction();        
+        $res = $this->controller->indexAction();
         
         $this->assertInstanceOf(\Anax\Response\ResponseUtility::class, $res);
         $this->assertContains("IP validering", $res->getBody());

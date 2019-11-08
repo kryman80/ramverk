@@ -5,7 +5,6 @@ namespace Anax\IPValidator;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
-
 /**
  * Controller for IP validation.
  */
@@ -16,7 +15,7 @@ class IPValidatorController implements ContainerInjectableInterface
     
     /**
      * Properties.
-     * 
+     *
      * @var Page $diPage        $di->page.
      * @var Request $diRequest  $di->get("request").
      */
@@ -36,11 +35,11 @@ class IPValidatorController implements ContainerInjectableInterface
 
     /**
      * Function page for index.
-     * 
+     *
      * Mount points:
      * ip
      * ip/index
-     * 
+     *
      * @return object       Renders index page.
      */
     public function indexAction()
@@ -49,7 +48,7 @@ class IPValidatorController implements ContainerInjectableInterface
 
         $page->add("ip/index");
                 
-        if ($this->diRequest->getGet("ip-address")) {                        
+        if ($this->diRequest->getGet("ip-address")) {
             $ipAddress = $this->diRequest->getGet("ip-address");
             
             $result = checkWhichIp($ipAddress);

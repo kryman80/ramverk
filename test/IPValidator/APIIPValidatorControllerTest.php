@@ -15,7 +15,7 @@ class APIIPValidatorControllerTest extends TestCase
 
     /**
      * Setting up the test environment.
-     */    
+     */
     public function setUp()
     {
         global $di;
@@ -76,7 +76,7 @@ class APIIPValidatorControllerTest extends TestCase
      */
     public function testJsonAction()
     {
-        $jsonError = json_encode($this->controller->jsonAction());        
+        $jsonError = json_encode($this->controller->jsonAction());
         $this->assertJsonStringEqualsJsonString(
             json_encode([ [ "error" => "Check your parameters." ] ]),
             $jsonError

@@ -5,7 +5,6 @@ namespace Anax\IPValidator;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
-
 /**
  * Controller for validating IP addresses by API.
  */
@@ -16,7 +15,7 @@ class APIIPValidatorController implements ContainerInjectableInterface
 
     /**
      * Local members.
-     * 
+     *
      * @var Page $diPage    $di->page.
      * @var Request $diReq  $di->request.
      */
@@ -35,7 +34,7 @@ class APIIPValidatorController implements ContainerInjectableInterface
 
     /**
      * Mount api; api/index.
-     * 
+     *
      * @return Page $page   Render ip/api page.
      */
     public function indexAction()
@@ -53,7 +52,7 @@ class APIIPValidatorController implements ContainerInjectableInterface
                 $ipAddress = str_replace("ip6 ", "", $ipAddress);
             } else {
                 $ipAddress = false;
-            }            
+            }
 
             $result = checkWhichIP($ipAddress);
 
@@ -73,10 +72,10 @@ class APIIPValidatorController implements ContainerInjectableInterface
     }
 
     public function jsonAction()
-    {        
+    {
         $req = $this->diReq->getGet("ip4") ?? $this->diReq->getGet("ip6") ?? false;
         
-        if (!$req) {            
+        if (!$req) {
             return [ ["error" => "Check your parameters."] ];
         }
 

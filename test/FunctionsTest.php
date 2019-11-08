@@ -34,7 +34,7 @@ class FunctionsTest extends TestCase
         $this->assertFalse(false);
         print($ip);
 
-        $ip = checkWhichIP($ip6Address);        
+        $ip = checkWhichIP($ip6Address);
         $this->assertTrue(true);
         print($ip);
 

@@ -3,14 +3,14 @@
 namespace Anax\IPValidator;
 
 function checkWhichIP($ipAddress)
-{    
+{
     $ip = strlen($ipAddress) < 32 ? ipv4($ipAddress) : ipv6($ipAddress);
 
     return $ip;
 }
 
 function ipv4($ipAddress)
-{    
+{
     foreach (explode(".", $ipAddress) as $value) {
         if (strlen($value) > 3) {
             return false;
@@ -27,7 +27,7 @@ function ipv4($ipAddress)
 }
 
 function ipv6($ipAddress)
-{    
+{
     $ip6AddressArray = explode(":", $ipAddress);
 
     if (count($ip6AddressArray) != 8) {
