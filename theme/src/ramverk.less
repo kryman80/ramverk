@@ -112,14 +112,14 @@
   */
  
  // Cleanup theses
- @anchorColor:         #33b;
- @anchorColor2:        #448;
- @anchorColorHover:    #33f;
- @anchorColorActive:   #838;
- @anchorColorVisited:  #838;
+//  @anchorColor:         #33b;
+//  @anchorColor2:        #448;
+//  @anchorColorHover:    #33f;
+//  @anchorColorActive:   #838;
+//  @anchorColorVisited:  #838;
  
- @anchorColorAnonymous:      @colorBody;
- @anchorColorAnonymousHover: #00c;
+//  @anchorColorAnonymous:      @colorBody;
+//  @anchorColorAnonymousHover: #00c;
  
  @anchorTabBgColor:          lighten(@anchorColorHover, 35%);
  @anchorTabBgColorHover:     lighten(@anchorColorHover, 30%);
@@ -144,12 +144,12 @@
      }
  }
  
- // Killed file links.less
- .anchor(@anchorColor, @anchorColorHover, @anchorColorVisited);
+//  // Killed file links.less
+//  .anchor(@anchorColor, @anchorColorHover, @anchorColorVisited);
  
- .footer {
-   .anchor(@anchorColor2)
- }
+//  .footer {
+//    .anchor(@anchorColor2)
+//  }
  
  .fab.fa-icon:hover {
      color: green;
@@ -183,8 +183,12 @@
  @import "layout/dbwebb-se_v2.less"; // Rearrange and move classic style to layout.less
  @import "layout/regions.less";
 
- @import "layout/layout_ramverk.less";
-  
+ /**
+  * My own layouts.
+  */
+ @import "layout/ramverk_layout.less";
+ @import "layout/ramverk_header.less";
+ 
  /**
   * My settings.
   */

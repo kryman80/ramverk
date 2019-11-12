@@ -5391,30 +5391,8 @@ h4:hover .header-anchor {
 }
 .breadcrumb-list li a:hover,
 .bullet-list li a:hover {
-  color: #33f;
+  color: darkred;
   text-decoration: underline;
-}
-a {
-  color: #33b;
-  text-decoration: underline;
-}
-a:visited {
-  color: #838;
-}
-a:hover {
-  color: #33f;
-  text-decoration: none;
-}
-.footer a {
-  color: #448;
-  text-decoration: underline;
-}
-.footer a:visited {
-  color: inherit;
-}
-.footer a:hover {
-  color: inherit;
-  text-decoration: none;
 }
 .fab.fa-icon:hover {
   color: green;
@@ -5450,7 +5428,7 @@ a:hover {
 .blog-post .meta-header a:hover,
 .blog-list .meta-footer a:hover,
 .blog-post .meta-footer a:hover {
-  color: #33f;
+  color: darkred;
   text-decoration: underline;
 }
 .blog-list .meta-footer ul,
@@ -5487,7 +5465,7 @@ a:hover {
   text-decoration: none;
 }
 .blog-list h1 a:hover {
-  color: #33f;
+  color: darkred;
   text-decoration: underline;
 }
 .blog-post h1 {
@@ -5512,7 +5490,7 @@ a:hover {
   text-decoration: none;
 }
 .blog-toc .toc li a:hover {
-  color: #33f;
+  color: darkred;
   text-decoration: underline;
 }
 /** --------------------------------------------------------------
@@ -6754,7 +6732,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .sidebar .block h4 a:hover,
 .columns-above .block h4 a:hover,
 .columns-below .block h4 a:hover {
-  color: #33f;
+  color: darkred;
   text-decoration: underline;
 }
 .article .block h4 a,
@@ -6906,6 +6884,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   border: 1px solid #6cbac4;
   color: #111;
 }
+/**
+  * My own layouts.
+  */
 @font-face {
   font-family: 'Open Sans Condensed';
   font-style: normal;
@@ -6928,6 +6909,15 @@ h5,
 h6 {
   font-family: 'Share Tech Mono', monospace;
   color: red;
+}
+a {
+  color: red;
+}
+a:visited {
+  color: blue;
+}
+a:hover {
+  color: darkred;
 }
 p {
   font-family: 'Open Sans Condensed', sans-serif;
@@ -6960,6 +6950,16 @@ p {
 .wrap-sidebar .block h4 {
   border-top: 1px solid #ccc;
   background-image: linear-gradient(to right, #fff, #ccc);
+}
+.region-header .region-header-col-1 {
+  display: none;
+}
+.region-header .region-header-col-2 {
+  display: inline;
+  float: left;
+  width: 98.95833333%;
+  margin-left: 0.52083333%;
+  margin-right: 0.52083333%;
 }
 /**
   * My settings.

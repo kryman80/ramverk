@@ -54,5 +54,10 @@ return [
             "url" => "api",
             "title" => "Validera en ip adress genom ett API."
         ],
+        [
+            "text" => "IP lookup.",
+            "url" => "ip-lookup",
+            "title" => "Get information about an IP.",
+        ],
     ],
 ];

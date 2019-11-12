@@ -44,14 +44,19 @@ return [
             "title" => "Verktyg och möjligheter för utveckling.",
         ],
         [
-            "text" => "IP validering",
+            "text" => "IP Validering",
             "url" => "ip",
             "title" => "Validera en ip adress."
         ],
         [
-            "text" => "API IP validering",
+            "text" => "API IP Validering",
             "url" => "api",
             "title" => "Validera en ip adress genom ett API."
+        ],
+        [
+            "text" => "IP Lookup",
+            "url" => "ip-lookup",
+            "title" => "Get information about an IP.",
         ],
     ],
 ];

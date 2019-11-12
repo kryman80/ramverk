@@ -2,10 +2,25 @@
 
 @fontHeaders: 'Share Tech Mono', monospace;
 @fontBodyText: 'Open Sans Condensed', sans-serif;
+@anchorColor: red;
+@anchorColorVisited: blue;
+@anchorColorHover: darkred;
 
 h1, h2, h3, h4, h5, h6 {
     font-family: @fontHeaders;
     color: red;
+}
+
+a {
+    color: @anchorColor;
+}
+
+a:visited {
+    color: @anchorColorVisited;
+}
+
+a:hover {
+    color: @anchorColorHover;
 }
 
 p {

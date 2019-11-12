@@ -37,6 +37,7 @@ return [
         //         "siteLogoAlt"   => "Löv",
         //     ],
         // ],
+        // My own.
         [
             "region" => "header-col-1",
             "template" => "anax/v2/header/site_logo_text",
@@ -54,13 +55,13 @@ return [
                 "navbarConfig" => require __DIR__ . "/navbar/header.php",
             ],
         ],
-        [
-            "region" => "header-col-3",
-            "template" => "anax/v2/navbar/responsive_submenus",
-            "data" => [
-                "navbarConfig" => require __DIR__ . "/navbar/responsive.php",
-            ],
-        ],
+        // [
+        //     "region" => "header-col-3",
+        //     "template" => "anax/v2/navbar/responsive_submenus",
+        //     "data" => [
+        //         "navbarConfig" => require __DIR__ . "/navbar/responsive.php",
+        //     ],
+        // ],
         [
             "region" => "footer",
             "template" => "anax/v2/columns/multiple_columns",
