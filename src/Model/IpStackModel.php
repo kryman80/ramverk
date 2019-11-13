@@ -2,7 +2,6 @@
 
 namespace Anax\Model;
 
-
 /**
  * Model for fetching IP related information from ipstack.
  */
@@ -13,6 +12,7 @@ class IpStackModel
      */
     private $ip;
     private $ipStackRespObj;
+    protected $accessKey;
 
     
     /**
@@ -22,7 +22,6 @@ class IpStackModel
     {
         $this->ip = false;
         $this->ipStackRespObj = null;
-        // $this->checkIP();
     }
 
 
@@ -33,7 +32,11 @@ class IpStackModel
      */
     public function checkIP()
     {
-        $curlHandle = curl_init("http://api.ipstack.com/check?access_key=fbe5349ecdc9b017fac1eaa1e2d32598&fields=ip");
+        $accKey = new \Anax\AccessKey();
+
+        $this->accessKey = $accKey->getKey();
+
+        $curlHandle = curl_init("http://api.ipstack.com/check?access_key=$this->accessKey&fields=ip");
         
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         
@@ -42,5 +45,11 @@ class IpStackModel
         curl_close($curlHandle);
 
         return $this->ip;
+    }
+
+
+    public function getInfoAboutIP($ipAddr = null)
+    {
+        // $ch = curl_init("")
     }
 }

@@ -14,6 +14,7 @@ class IPValidationModel
      */
     private $validIPv4;
     private $validIPv6;
+    private $versionOfIP;
 
 
     /**
@@ -25,6 +26,7 @@ class IPValidationModel
     {
         $this->validIPv4 = false;
         $this->validIPv6 = false;
+        $this->versionOfIP = null;
         $this->checkWhichIP($ipAddress);
     }
 
@@ -57,6 +59,8 @@ class IPValidationModel
      */
     public function ipv4($ipAddress)
     {
+        $this->versionOfIP = "4";
+
         foreach (explode(".", $ipAddress) as $value) {
             if (strlen($value) > 3) {
                 return false;
@@ -84,6 +88,8 @@ class IPValidationModel
      */
     public function ipv6($ipAddress)
     {
+        $this->versionOfIP = "6";
+
         $ip6AddressArray = explode(":", $ipAddress);
 
         if (count($ip6AddressArray) != 8) {
@@ -101,5 +107,38 @@ class IPValidationModel
         $this->validIPv6 = preg_match("/^$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+\:$ip6P+/", $ipAddress) ? true : false;
 
         return $this->validIPv6;
+    }
+
+
+    /**
+     * Get the value of $validIPv4.
+     * 
+     * @return bool $validIPv4
+     */
+    public function getValidIPv4()
+    {
+        return $this->validIPv4;
+    }
+
+
+    /**
+     * Get the value of $validIPv6.
+     * 
+     * @return bool $validIPv6
+     */
+    public function getValidIPv6()
+    {
+        return $this->validIPv6;
+    }
+
+
+    /**
+     * Get the version of IP.
+     * 
+     * @return bool $versionOfIP
+     */
+    public function getVersionOfIP()
+    {
+        return $this->versionOfIP;
     }
 }
