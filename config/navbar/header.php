@@ -58,5 +58,10 @@ return [
             "url" => "ip-lookup",
             "title" => "Get information about an IP.",
         ],
+        [
+            "text" => "IP API Lookup",
+            "url" => "ip-lookup/api",
+            "title" => "Get information about an IP via REST API.",
+        ],
     ],
 ];

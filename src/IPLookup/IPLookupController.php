@@ -41,8 +41,12 @@ class IPLookupController implements ContainerInjectableInterface
     /**
      * Mount index.
      */
-    public function indexAction()
+    public function indexAction($api = null)
     {
+        if ($api) {
+            var_dump($api);
+            return;
+        }
         $page = $this->diPage;
 
         $request = $this->diRequest;
@@ -53,15 +57,13 @@ class IPLookupController implements ContainerInjectableInterface
             "ip" => $ipObj,
         ];
 
-        // var_dump($this->ipStack);
-
         $page->add("ip-lookup/index", $data);
 
         if ($request->getGet("ip")) {
             $isAnyIPValid = false;
             $ipstackObj = null;
             $ip = $request->getGet("ip");
-            
+            var_dump($request->getGet("ip"));
             $this->checkValidIP->checkWhichIP($request->getGet("ip"));
             
             if ($this->checkValidIP->getValidIPv4() || $this->checkValidIP->getValidIPv6()) {
@@ -79,11 +81,32 @@ class IPLookupController implements ContainerInjectableInterface
             ];
             
             $page->add("ip-lookup/validation", $validationData);
-            // var_dump($this->ipStack);
         }
 
         return $page->render([
             "title" => $this->title,
+        ]);
+    }
+
+
+    public function apiAction()
+    {
+        $page = $this->diPage;
+        $request = $this->diRequest;
+        $ipObj = json_decode($this->ipStack->checkIP());
+        
+        $data = [
+            "ip" => $ipObj->ip,
+        ];
+
+        $page->add("ip-lookup/api", $data);
+
+        if ($request->getGet("ip")) {
+            $this->indexAction($request->getGet("ip"));
+        }
+
+        return $page->render([
+            "title" => $this->title . " via REST API",
         ]);
     }
 }

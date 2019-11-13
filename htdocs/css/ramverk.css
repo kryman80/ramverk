@@ -6939,6 +6939,7 @@ p {
   border-top: 1px solid #ccc;
   background-image: linear-gradient(to right, #fff, #ccc);
 }
+/* Not using these. */
 .region-header .site-logo {
   position: absolute;
   top: 40px;
