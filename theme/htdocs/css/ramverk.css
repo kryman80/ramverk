@@ -6959,6 +6959,19 @@ p {
   margin-left: 0.52083333%;
   margin-right: 0.52083333%;
 }
+.table-ramverk {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-ramverk th {
+  text-align: left;
+}
+.table-ramverk td {
+  width: 100px;
+  padding: 0 3px 0 0;
+  text-align: left;
+  word-break: break-word;
+}
 /**
   * My settings.
   */

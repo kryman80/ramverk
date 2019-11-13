@@ -8,11 +8,12 @@ namespace Anax\Model;
 class IpStackModel
 {
     /**
-     * @var this $ipStackRespObj
+     * @var this $ipstackRespObj
      */
     private $ip;
-    private $ipStackRespObj;
+    private $ipstackRespObj;
     protected $accessKey;
+    private $ipstackBaseUrl;
 
     
     /**
@@ -21,14 +22,16 @@ class IpStackModel
     function __construct()
     {
         $this->ip = false;
-        $this->ipStackRespObj = null;
+        $this->ipstackRespObj = null;
+        $this->ipstackBaseUrl = "http://api.ipstack.com";
+        $this->accessKey = null;
     }
 
 
     /**
      * Check IP from ipstack.
      * 
-     * @return IpStackModel $ipStackRespObj
+     * @return IpStackModel $ipstackRespObj
      */
     public function checkIP()
     {
@@ -36,7 +39,7 @@ class IpStackModel
 
         $this->accessKey = $accKey->getKey();
 
-        $curlHandle = curl_init("http://api.ipstack.com/check?access_key=$this->accessKey&fields=ip");
+        $curlHandle = curl_init("{$this->ipstackBaseUrl}/check?access_key={$this->accessKey}&fields=ip");
         
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
         
@@ -50,6 +53,14 @@ class IpStackModel
 
     public function getInfoAboutIP($ipAddr = null)
     {
-        // $ch = curl_init("")
+        $ch = curl_init("{$this->ipstackBaseUrl}/{$ipAddr}?access_key={$this->accessKey}");
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $this->ipstackRespObj = curl_exec($ch);
+
+        curl_close($ch);
+
+        return $this->ipstackRespObj;
     }
 }
