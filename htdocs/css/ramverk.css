@@ -6923,18 +6923,6 @@ p {
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 1.5rem;
 }
-.region-header .region-header-col-1 {
-  font-family: 'Share Tech Mono', monospace;
-}
-.site-logo {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-}
-.site-logo-text {
-  padding-left: 0.2em;
-  font-size: 2rem;
-}
 .rm-navbar {
   text-align: center;
   font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
@@ -6951,7 +6939,17 @@ p {
   border-top: 1px solid #ccc;
   background-image: linear-gradient(to right, #fff, #ccc);
 }
+.region-header .site-logo {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+.region-header .site-logo-text {
+  padding-left: 0.2em;
+  font-size: 2rem;
+}
 .region-header .region-header-col-1 {
+  font-family: 'Share Tech Mono', monospace;
   display: none;
 }
 .region-header .region-header-col-2 {

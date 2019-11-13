@@ -7,6 +7,6 @@
 </p>
 
 <form>
-    <input type="text" name="ip" />
-    <input type="submit" />
+    <input type="text" name="ip" value="<?= $ip->ip ?>" />
+    <input type="submit" value="Submit IP" />
 </form>

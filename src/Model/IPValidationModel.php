@@ -9,7 +9,8 @@ namespace Anax\Model;
 class IPValidationModel
 {
     /**
-     * @var bool $validIP
+     * @var bool $validIPv4
+     * @var bool $validIPv6
      */
     private $validIPv4;
     private $validIPv6;
@@ -32,8 +33,10 @@ class IPValidationModel
      * Check version and address of IP.
      * 
      * @param string $ipAddress
+     * 
+     * @return bool $ip
      */
-    function checkWhichIP($ipAddress)
+    public function checkWhichIP($ipAddress)
     {
         if (is_null($ipAddress)) {
             return;
@@ -49,8 +52,10 @@ class IPValidationModel
      * Check validity of IPv4 address.
      * 
      * @param string $ipAddress
+     * 
+     * @return bool $validIPv4
      */
-    function ipv4($ipAddress)
+    public function ipv4($ipAddress)
     {
         foreach (explode(".", $ipAddress) as $value) {
             if (strlen($value) > 3) {
@@ -74,8 +79,10 @@ class IPValidationModel
      * Check validity of IPv6 address.
      * 
      * @param string $ipAddress
+     * 
+     * @return bool $validIPv6
      */
-    function ipv6($ipAddress)
+    public function ipv6($ipAddress)
     {
         $ip6AddressArray = explode(":", $ipAddress);
 
