@@ -43,13 +43,13 @@ class IPLookupController implements ContainerInjectableInterface
      */
     public function indexAction($api = null)
     {
-        if ($api) {
-            var_dump($api);
-            return;
-        }
-        $page = $this->diPage;
-
         $request = $this->diRequest;
+
+        if ($api) {
+            $request->setGet("ip", substr($api, 4));
+        }
+            
+        $page = $this->diPage;
 
         $ipObj = json_decode($this->ipStack->checkIP());
 
@@ -57,13 +57,12 @@ class IPLookupController implements ContainerInjectableInterface
             "ip" => $ipObj,
         ];
 
-        $page->add("ip-lookup/index", $data);
+        $api ? null : $page->add("ip-lookup/index", $data);
 
         if ($request->getGet("ip")) {
             $isAnyIPValid = false;
             $ipstackObj = null;
             $ip = $request->getGet("ip");
-            var_dump($request->getGet("ip"));
             $this->checkValidIP->checkWhichIP($request->getGet("ip"));
             
             if ($this->checkValidIP->getValidIPv4() || $this->checkValidIP->getValidIPv6()) {
@@ -77,15 +76,18 @@ class IPLookupController implements ContainerInjectableInterface
                 "ipv6" =>  $this->checkValidIP->getValidIPv6(),
                 "version" => $this->checkValidIP->getVersionOfIP(),
                 "ip" => $ip,
+                "api" => $api,
                 "ipstack" => $ipstackObj,
             ];
-            
+
             $page->add("ip-lookup/validation", $validationData);
         }
 
-        return $page->render([
-            "title" => $this->title,
-        ]);
+        if (!$api) {
+            return $page->render([
+                "title" => $this->title,
+            ]);
+        }        
     }
 
 

@@ -10,6 +10,6 @@
 </p>
 
 <form method="index">
-    <input type="text" name="ip" value="<?= $ip ?>" />
+    <input type="text" name="ip" value="ip4 <?= $ip ?>" />
     <input type="submit" value="Submit IP" />
 </form>

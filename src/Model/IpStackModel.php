@@ -63,4 +63,10 @@ class IpStackModel
 
         return $this->ipstackRespObj;
     }
+
+
+    public function getIpstackRespObj()
+    {
+        return $this->ipstackRespObj;
+    }
 }
