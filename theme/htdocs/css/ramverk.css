@@ -6939,7 +6939,23 @@ p {
   border-top: 1px solid #ccc;
   background-image: linear-gradient(to right, #fff, #ccc);
 }
-/* Not using these. */
+.div-container h2 {
+  margin: 0;
+}
+.div-container .div-left {
+  width: 49%;
+  display: inline-block;
+  vertical-align: text-top;
+}
+.div-container .div-right {
+  width: 50%;
+  display: inline-block;
+  vertical-align: text-top;
+}
+.div-container .div-form {
+  margin-top: 30px;
+  text-align: center;
+}
 .region-header .site-logo {
   position: absolute;
   top: 40px;

@@ -24,7 +24,8 @@ class IpStackModel
         $this->ip = false;
         $this->ipstackRespObj = null;
         $this->ipstackBaseUrl = "http://api.ipstack.com";
-        $this->accessKey = null;
+        $accKey = new \Anax\AccessKey();
+        $this->accessKey = $accKey->getKey();
     }
 
 
@@ -35,10 +36,6 @@ class IpStackModel
      */
     public function checkIP()
     {
-        $accKey = new \Anax\AccessKey();
-
-        $this->accessKey = $accKey->getKey();
-
         $curlHandle = curl_init("{$this->ipstackBaseUrl}/check?access_key={$this->accessKey}&fields=ip");
         
         curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
@@ -67,6 +64,35 @@ class IpStackModel
 
     public function getIpstackRespObj()
     {
+        return $this->ipstackRespObj;
+    }
+
+
+    public function getSpecificInfoAboutIP($ip, $route)
+    {
+        $ch = curl_init(
+            "{$this->ipstackBaseUrl}/{$ip}" .
+            "?access_key={$this->accessKey}"
+        );
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $resp = json_decode(curl_exec($ch));
+
+        curl_close($ch);
+
+        $route == "all" ? $resp = $resp : (
+            $route == "ip" ? $resp = [ "ip" => $resp->ip, "type" => $resp->type ] : (
+                $route == "country" ? $resp = [ "country" => $resp->country_name ] : (
+                    $route == "city" ? $resp = [ "city" => $resp->city ] : (
+                        $route == "latlong" ? $resp = [ "latitude" => $resp->latitude, "longitude" => $resp->longitude ] : null
+                    )
+                )
+            )
+        );
+
+        $this->ipstackRespObj = $resp;
+
         return $this->ipstackRespObj;
     }
 }

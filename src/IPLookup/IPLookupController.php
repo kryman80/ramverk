@@ -107,8 +107,30 @@ class IPLookupController implements ContainerInjectableInterface
             $this->indexAction($request->getGet("ip"));
         }
 
+        if ($request->getGet("route")) {
+            $ipstack = json_decode($this->ipstack->getIPstackRespObj());
+
+            var_dump($request->getGet("route"));
+
+            return [[ $ipstack ]];
+        }
+
         return $page->render([
             "title" => $this->title . " via REST API",
         ]);
+    }
+
+
+    public function apiJsonAction()
+    {
+        $req = $this->diRequest;
+
+        if ($req->getGet("ip")) {
+            $ip = $req->getGet("ip");
+            $route = $req->getGet("route", null);
+            $ipstackObj = $this->ipStack->getSpecificInfoAboutIP($ip, $route);
+
+            return [[$ipstackObj]];
+        }
     }
 }
