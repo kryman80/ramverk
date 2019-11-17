@@ -8,7 +8,10 @@ namespace Anax\Model;
 class IpStackModel
 {
     /**
-     * @var this $ipstackRespObj
+     * @var IpStackModel $ip                IP address.
+     * @var IpStackModel $ipstackRespObj    ipstack object.
+     * @var IpStackModel $accessKey         Access key for the ipstack API.
+     * @var IpStackModel $ipstackBaseUrl    Base URL for the ipstack API.
      */
     private $ip;
     private $ipstackRespObj;
@@ -19,7 +22,7 @@ class IpStackModel
     /**
      * Constructor.
      */
-    function __construct()
+    public function __construct()
     {
         $this->ip = false;
         $this->ipstackRespObj = null;
@@ -31,8 +34,8 @@ class IpStackModel
 
     /**
      * Check IP from ipstack.
-     * 
-     * @return IpStackModel $ipstackRespObj
+     *
+     * @return IpStackModel $ip
      */
     public function checkIP()
     {
@@ -48,6 +51,11 @@ class IpStackModel
     }
 
 
+    /**
+     * Get all info about certain IP.
+     *
+     * @return IpStackModel $ipstackRespObj
+     */
     public function getInfoAboutIP($ipAddr = null)
     {
         $ch = curl_init("{$this->ipstackBaseUrl}/{$ipAddr}?access_key={$this->accessKey}");
@@ -62,12 +70,23 @@ class IpStackModel
     }
 
 
+    /**
+     * Get $ipstackRespObj.
+     *
+     * @return IpStackModel $ipstackRespObj
+     */
     public function getIpstackRespObj()
     {
         return $this->ipstackRespObj;
     }
 
 
+    /**
+     * Get specific information about an IP.
+     * Method used particularly for test routes.
+     *
+     * @return IpStackModel $ipstackRespObj
+     */
     public function getSpecificInfoAboutIP($ip, $route)
     {
         $ch = curl_init(

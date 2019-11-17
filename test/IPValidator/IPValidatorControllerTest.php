@@ -51,7 +51,6 @@ class IPValidatorControllerTest extends TestCase
     /**
      * Test index mountpoint.
      */
-
     public function testIndexAction()
     {
         $res = $this->controller->indexAction();

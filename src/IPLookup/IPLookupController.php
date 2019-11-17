@@ -23,11 +23,12 @@ class IPLookupController implements ContainerInjectableInterface
 
     /**
      * Initalize the controller with certain variables.
-     * 
+     *
      * @var string $title
      * @var Page $diPage
      * @var Request diRequest
      * @var IPValidationModel $checkValidIP
+     * @var IpStackModel $ipStack
      */
     public function initialize()
     {
@@ -87,10 +88,14 @@ class IPLookupController implements ContainerInjectableInterface
             return $page->render([
                 "title" => $this->title,
             ]);
-        }        
+        }
     }
 
 
+    /**
+     * Mount api.
+     * Validating IP addresses via API and returning JSON results in some cases.
+     */
     public function apiAction()
     {
         $page = $this->diPage;
@@ -110,8 +115,6 @@ class IPLookupController implements ContainerInjectableInterface
         if ($request->getGet("route")) {
             $ipstack = json_decode($this->ipstack->getIPstackRespObj());
 
-            var_dump($request->getGet("route"));
-
             return [[ $ipstack ]];
         }
 
@@ -121,6 +124,11 @@ class IPLookupController implements ContainerInjectableInterface
     }
 
 
+    /**
+     * Test routes.
+     *
+     * @return JSON
+     */
     public function apiJsonAction()
     {
         $req = $this->diRequest;

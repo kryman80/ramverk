@@ -2,7 +2,6 @@
 
 namespace Anax\Model;
 
-
 /**
  * Model class for validating IP adresses.
  */
@@ -19,10 +18,10 @@ class IPValidationModel
 
     /**
      * Constructor.
-     * 
+     *
      * @param string $ipAddress
      */
-    function __construct($ipAddress = null)
+    public function __construct($ipAddress = null)
     {
         $this->validIPv4 = false;
         $this->validIPv6 = false;
@@ -33,9 +32,9 @@ class IPValidationModel
 
     /**
      * Check version and address of IP.
-     * 
+     *
      * @param string $ipAddress
-     * 
+     *
      * @return bool $ip
      */
     public function checkWhichIP($ipAddress)
@@ -52,9 +51,9 @@ class IPValidationModel
 
     /**
      * Check validity of IPv4 address.
-     * 
+     *
      * @param string $ipAddress
-     * 
+     *
      * @return bool $validIPv4
      */
     public function ipv4($ipAddress)
@@ -81,9 +80,9 @@ class IPValidationModel
     
     /**
      * Check validity of IPv6 address.
-     * 
+     *
      * @param string $ipAddress
-     * 
+     *
      * @return bool $validIPv6
      */
     public function ipv6($ipAddress)
@@ -112,7 +111,7 @@ class IPValidationModel
 
     /**
      * Get the value of $validIPv4.
-     * 
+     *
      * @return bool $validIPv4
      */
     public function getValidIPv4()
@@ -123,7 +122,7 @@ class IPValidationModel
 
     /**
      * Get the value of $validIPv6.
-     * 
+     *
      * @return bool $validIPv6
      */
     public function getValidIPv6()
@@ -134,7 +133,7 @@ class IPValidationModel
 
     /**
      * Get the version of IP.
-     * 
+     *
      * @return bool $versionOfIP
      */
     public function getVersionOfIP()

@@ -1,5 +1,5 @@
 <h2>Validation result</h2>
-<?php if ($isIPValid): ?>
+<?php if ($isIPValid) : ?>
     <table class="table-ramverk">
         <tr>
             <th>IP</th>
@@ -18,7 +18,7 @@
                 <td><?= json_encode($ipstack->city) ?></td>
                 <td><?= json_encode($ipstack->country_name) ?></td>
             </tr>
-        <?php else: ?>
+        <?php else : ?>
         <tr>
             <td style="color: green;"><?= $ipstack->ip ?></td>
             <td><?= $ipstack->type ?></td>
@@ -29,7 +29,7 @@
         </tr>
         <?php endif; ?>
     </table>
-<?php else: ?>
+<?php else : ?>
     <p style="color: red;">
         <?= $api ? '"IPv' . $version . '": ' . json_encode($ip)
         : "IPv" . $version . " " . $ip ?> is invalid.
