@@ -34,14 +34,42 @@ class IPLookupControllerTest extends TestCase
         $this->controller = new IPLookupController();
         $this->controller->setDI($this->di);
         $this->controller->initialize();
+
+        // My own variables.
+        $this->diReq = $this->di->get("request");
     }
 
 
     /**
      * Testing initialize function.
+     *
+     * Checking if attribute exists.
      */
     public function testInitialize()
     {
-        $this->controller->initialize();
+        $IPController = new IPLookupController();
+        $this->assertObjectHasAttribute("diPage", $IPController);
+    }
+
+
+    /**
+     * Testing index action.
+     *
+     * 1. Test $api argument has any value when defining it
+     * as a parameter in the function definition.
+     * When argument has a value, the get request will be set.
+     * 1.1 Test without a value.
+     * 1.2 Test with any value.
+     */
+    public function testIndexAction()
+    {
+        // 1.1
+        $api = null;
+        $this->controller->indexAction($api);
+        $this->assertEmpty($this->diReq->getGet("ip"));
+        // 1.2
+        $api = "value";
+        $this->controller->indexAction($api);
+        $this->assertIsString($this->diReq->getGet("ip"));
     }
 }
