@@ -10,6 +10,7 @@ class IPValidationModel
     /**
      * @var bool $validIPv4
      * @var bool $validIPv6
+     * @var string $versionOfIP
      */
     private $validIPv4;
     private $validIPv6;
