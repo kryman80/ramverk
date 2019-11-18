@@ -110,4 +110,25 @@ class IPLookupControllerTest extends TestCase
         $this->diReq->setGet("route", "value");
         $this->controller->apiAction();
     }
+
+
+    /**
+     * Testing API JSON action.
+     *
+     * 1. Calling the function.
+     * 2. Checking requests.
+     * 3. Asserting return is an arrary.
+     */
+    public function testApiJsonAction()
+    {
+        // 1.
+        $this->controller->apiJsonAction();
+        
+        // 2.
+        $this->diReq->setGet("ip", "value");
+        $this->diReq->setGet("route", "all");
+
+        // 3.
+        $this->assertIsArray($this->controller->apiJsonAction());
+    }
 }
