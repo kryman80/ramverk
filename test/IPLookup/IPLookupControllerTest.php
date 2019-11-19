@@ -95,6 +95,7 @@ class IPLookupControllerTest extends TestCase
      *
      * 1. Testing when landing on page if ipstack API is working.
      * 2. Check correct requests.
+     * 3. Check correct response from ipstack.
      */
     public function testApiAction()
     {
@@ -106,9 +107,26 @@ class IPLookupControllerTest extends TestCase
         // 2.1 Check "ip" request.
         $this->diReq->setGet("ip", "value");
         $this->controller->apiAction();
-        //2.2 Check "route" request.
+        // 2.2 Check "route" request.
         $this->diReq->setGet("route", "value");
         $this->controller->apiAction();
+
+        // 2.3 Check correct API from input.
+        // Wrong API input.
+        $this->diReq->setGet("ip", "155.55.234.41");
+        $ip = $this->diReq->getGet("ip");
+        $this->controller->apiAction();
+        $this->assertNotEquals("ip4 155.55.234.41", $ip);
+        // Correct API input.
+        $this->diReq->setGet("ip", "ip4 155.55.234.41");
+        $ip = $this->diReq->getGet("ip");
+        $this->controller->apiAction();
+        $this->assertEquals("ip4 155.55.234.41", $ip);
+        
+        // 3 Check correct IP returns back after calling ipstack.
+        $ip = "155.55.234.41";
+        $json = $this->controller->apiJsonAction($ip);
+        $this->assertEquals($ip, $json[0][0]->ip);
     }
 
 

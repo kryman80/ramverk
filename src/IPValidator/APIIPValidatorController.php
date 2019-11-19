@@ -54,16 +54,26 @@ class APIIPValidatorController implements ContainerInjectableInterface
                 $ipAddress = false;
             }
 
-            $result = checkWhichIP($ipAddress);
+            // $result = checkWhichIP($ipAddress);
+            $IPValidator = new \Anax\Model\IPValidationModel();
+            $result = $IPValidator->checkWhichIP($ipAddress);
+
+            // $data = [
+            //     "ip" => json_encode($ipAddress),
+            //     "result" => $result,
+            //     "ip4" => strpos($ipAddress, ".") ? json_encode("ip4") : json_encode("ip6"),
+            //     "hostname" => json_encode(@gethostbyaddr($ipAddress)),
+            // ];
 
             $data = [
-                "ip" => json_encode($ipAddress),
+                "ip" => $ipAddress,
                 "result" => $result,
-                "ip4" => strpos($ipAddress, ".") ? json_encode("ip4") : json_encode("ip6"),
-                "hostname" => json_encode(@gethostbyaddr($ipAddress)),
+                "type" => $IPValidator->getValidIPv4() ? "ipv4" : ($IPValidator->getValidIPv6() ? "ipv6" : false),
+                "hostname" => @gethostbyaddr($ipAddress),
             ];
 
-            $page->add("api/validation", $data);
+            // $page->add("api/validation", $data);
+            return [ $data ];
         }
 
         return $page->render([

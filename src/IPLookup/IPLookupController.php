@@ -108,12 +108,17 @@ class IPLookupController implements ContainerInjectableInterface
 
         $page->add("ip-lookup/api", $data);
 
-        if ($request->getGet("ip")) {
-            $this->indexAction($request->getGet("ip"));
+        $searchIPVersion = substr($request->getGet("ip"), 0, 3);
+
+        if ($searchIPVersion == "ip4" || $searchIPVersion == "ip6") {
+            // $this->indexAction($request->getGet("ip"));
+            $request->setGet("ip", substr($request->getGet("ip"), 4));
+            $ip = $request->getGet("ip");
+            return $this->apiJsonAction($ip);
         }
 
         if ($request->getGet("route")) {
-            $ipstack = json_decode($this->ipStack->getIPstackRespObj());
+            $ipstack = json_decode(json_encode($this->ipStack->getIPstackRespObj()));
 
             return [[ $ipstack ]];
         }
@@ -129,11 +134,11 @@ class IPLookupController implements ContainerInjectableInterface
      *
      * @return JSON
      */
-    public function apiJsonAction()
+    public function apiJsonAction($ipFromapiAction = null)
     {
         $req = $this->diRequest;
 
-        if ($req->getGet("ip")) {
+        if ($req->getGet("ip") || $ipFromapiAction) {
             $ip = $req->getGet("ip");
             $route = $req->getGet("route", null);
             $ipstackObj = $this->ipStack->getSpecificInfoAboutIP($ip, $route);
