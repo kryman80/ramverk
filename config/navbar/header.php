@@ -68,5 +68,10 @@ return [
             "url" => "ip-lookup/api",
             "title" => "Get information about an IP via REST API.",
         ],
+        [
+            "text" => "Weather Prognose",
+            "url" => "weather",
+            "title" => "Get information about weather prognoses.",
+        ],
     ],
 ];
