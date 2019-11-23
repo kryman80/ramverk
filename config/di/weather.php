@@ -8,11 +8,9 @@ return [
     "services" => [
         "weather" => [
             "shared" => true,
-            // "callback" => "\Anax\Weather\Weather"
             "callback" => function () {
                 $weather = new \Anax\Weather\Weather();
-                // $weather = new \Anax\Model\IPValidationModel();
-                // $weather->setDI($this);
+                $weather->setDI($this);                
                 return $weather;
             }
         ],

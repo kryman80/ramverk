@@ -17,6 +17,8 @@ class WeatherController implements ContainerInjectableInterface
      */
     private $diPage;
     private $diRequest;
+    private $diWeather;
+    private $latLong;
     private $title;
 
 
@@ -27,6 +29,8 @@ class WeatherController implements ContainerInjectableInterface
     {
         $this->diPage = $this->di->get("page");
         $this->diRequest = $this->di->get("request");
+        $this->diWeather = $this->di->get("weather");
+        $this->latLong = null;
         $this->title = "Looking up weather prognoses";
     }
 
@@ -39,20 +43,21 @@ class WeatherController implements ContainerInjectableInterface
      */
     public function indexAction()
     {
-        if ($this->diRequest->getGet("weather")) {
-            $latLong = $this->diRequest->getGet("weather");
+        $isLatLongValid = null;
 
-            // if ($latLong)
+        if ($this->diRequest->getGet("weather")) {
+            $this->latLong = $this->diRequest->getGet("weather");
+
+            $isLatLongValid = $this->diWeather->checkLatLongInput($this->latLong);
         }
+
         $data = [
-            // "title" => $this->title,
+            "isInputValid" => $isLatLongValid,
+            "latLong" => $this->latLong,
         ];
 
-        $this->diPage->add("weather/index");
-
-        $greet = $this->di->get("weather");
-
-        return $greet->greet();
+        $this->diPage->add("weather/index", $data);
+        
 
         return $this->diPage->render([
             "title" => $this->title,
