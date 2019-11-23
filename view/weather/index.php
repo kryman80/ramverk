@@ -11,7 +11,7 @@
 
 <form>
     <input type="text" name="weather" placeholder="latitude,longitude" />
-    <input type="submit" name="submit-weather" value="Submit" />
+    <input type="submit" value="Submit" />
 </form>
 
 <p>
