@@ -44,16 +44,18 @@ class WeatherController implements ContainerInjectableInterface
     public function indexAction()
     {
         $isLatLongValid = null;
+        $chResponse = null;
 
         if ($this->diRequest->getGet("weather")) {
             $this->latLong = $this->diRequest->getGet("weather");
 
-            $isLatLongValid = $this->diWeather->checkLatLongInput($this->latLong);
+            $chResponse = $this->diWeather->checkLatLongInput($this->latLong);
         }
 
         $data = [
             "isInputValid" => $isLatLongValid,
             "latLong" => $this->latLong,
+            "chResponse" => $chResponse,
         ];
 
         $this->diPage->add("weather/index", $data);

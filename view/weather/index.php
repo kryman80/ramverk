@@ -18,6 +18,25 @@
     <?= is_null($isInputValid) ? null : ($isInputValid == false) ? "The format is wrong: " . $latLong : null ?>
 </p>
 
+<?php if ($chResponse) : ?>
+    <?php if ($chResponse[0]["code"] == 400) : ?>
+        <p>The given location is invalid.</p>
+    <?php else : ?>
+    <table>
+        <tr>
+            <th>Latitude / Longitude</th>
+            <th></th>
+        </tr>
+        <?php foreach ($chResponse as $value) : ?>
+        <tr>
+            <td><?= $value["latitude"] . " / " . $value["longitude"] ?></td>
+            <td></td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php endif; ?>
+<?php endif; ?>    
+
 <p>
     <a href="https://darksky.net/poweredby/">Powered by Dark Sky</a>
 </p>

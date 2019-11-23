@@ -35,7 +35,7 @@ class Weather implements ContainerInjectableInterface
         );
 
         if ($this->isLatLongValidInput) {
-            $this->checkLatLongWeather($latLong);
+            return $this->checkLatLongWeather($latLong);
         } else {
             return $this->isLatLongValidInput;
         }
@@ -49,45 +49,38 @@ class Weather implements ContainerInjectableInterface
         $chSetOptions = [
             CURLOPT_RETURNTRANSFER => true,
         ];
+
         $url = "{$this->darkSkyApiUrl}/{$latLong}";
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $chSetOptions);
-
-        $forecastResponse = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-
-        // var_dump($res);
-        
-        $mh = curl_multi_init();
-        // $errCode = curl_multi_add_handle($mh, $ch);
-
         $curlHandlers = [];
+        $mh = curl_multi_init();
 
-        foreach ($forecastResponse as $fr) {
-            // $ch = curl_init();
-        }
-
-        // if ($errCode == 0) {            
-        //     do {
-        //         $status = curl_multi_exec($mh, $stillRunning);
-        //         if ($stillRunning) {
-        //             curl_multi_select($mh);
-        //             $chArr[] = curl_multi_getcontent($ch);
-        //         }
-        //     } while ($stillRunning && $status == CURLM_OK);
+        $date = new \DateTime();
+        for ($i = 1; $i <= 3; $i++) {            
+            $di = new \DateInterval("P{$i}D");
+            $diff = date_sub($date, $di);
+            $timestamp = date_timestamp_get($diff);
             
-        //     curl_multi_remove_handle($mh, $ch);
-        //     curl_multi_close($mh);
-        // }
+            $ch = curl_init("{$url},{$timestamp}?exclude=currently,minutely,hourly");
+            curl_setopt_array($ch, $chSetOptions);
+            curl_multi_add_handle($mh, $ch);
+            $curlHandlers[] = $ch;
+        }
+        
+        do {
+            curl_multi_exec($mh, $stillRunning);
+            if ($stillRunning) {
+                curl_multi_select($mh);
+            }
+        } while ($stillRunning);
 
-        // $jArr = [];
-        // foreach ($chArr as $c) {
-        //     $jArr[] = json_decode($c, true);
-        // }
-        // foreach ($jArr as $j) {
-        //     // var_dump($j[0][0]);
-        // }
-        // var_dump($jArr);
+        $chResponseList = [];
+        foreach ($curlHandlers as $ch) {
+            $chResponseList[] = json_decode(curl_multi_getcontent($ch), true);
+            curl_multi_remove_handle($mh, $ch);
+        }
+        curl_multi_close($mh);
+
+        return $chResponseList;
     }
 
 
