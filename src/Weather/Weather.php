@@ -54,8 +54,8 @@ class Weather implements ContainerInjectableInterface
         $curlHandlers = [];
         $mh = curl_multi_init();
 
-        $date = new \DateTime();
-        for ($i = 1; $i <= 3; $i++) {            
+        for ($i = 1; $i <= 3; $i++) {
+            $date = new \DateTime();
             $di = new \DateInterval("P{$i}D");
             $diff = date_sub($date, $di);
             $timestamp = date_timestamp_get($diff);

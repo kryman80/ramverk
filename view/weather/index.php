@@ -27,13 +27,13 @@
     <table class="table-ramverk">
         <tr>
             <th>Latitude / Longitude</th>
-            <th>Time</th>
+            <th>Date</th>
         </tr>
         <?php foreach ($chResponse as $value) : ?>
-        <?php $daily = $value["daily"]["data"][0] ?>
+        <?php $date = date("Y/m/d", $value["daily"]["data"][0]["time"]) ?>
         <tr>
             <td><?= $value["latitude"] . " / " . $value["longitude"] ?></td>
-            <td><?= $r = $daily["time"] ?></td>
+            <td><?= $date ?></td>
         </tr>
         <?php endforeach; ?>
     </table>
