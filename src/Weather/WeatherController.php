@@ -51,9 +51,13 @@ class WeatherController implements ContainerInjectableInterface
 
             $chResponse = $this->diWeather->checkLatLongInput($this->latLong);
         }
-
+        // $a = json_decode(json_encode($chResponse));
+        // var_dump($a);
+        // foreach ($chResponse as $key => $val) {
+        //     var_dump($val["daily"]["data"][0]["time"]);
+        // }        
         $data = [
-            "isInputValid" => $isLatLongValid,
+            "isInputValid" => $this->diWeather->getIsLatLongValidInput(),
             "latLong" => $this->latLong,
             "chResponse" => $chResponse,
         ];

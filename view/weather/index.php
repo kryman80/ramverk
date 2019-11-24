@@ -14,23 +14,26 @@
     <input type="submit" value="Submit" />
 </form>
 
-<p>
-    <?= is_null($isInputValid) ? null : ($isInputValid == false) ? "The format is wrong: " . $latLong : null ?>
+<?php if ($isInputValid == false) : ?>
+<p class="error-message">
+    The format is wrong! <?= $latLong ?>
 </p>
+<?php endif; ?>
 
 <?php if ($chResponse) : ?>
-    <?php if ($chResponse[0]["code"] == 400) : ?>
-        <p>The given location is invalid.</p>
+    <?php if (isset($chResponse[0]["code"]) == 400) : ?>
+        <p class="error-message">The given location is invalid!</p>
     <?php else : ?>
-    <table>
+    <table class="table-ramverk">
         <tr>
             <th>Latitude / Longitude</th>
-            <th></th>
+            <th>Time</th>
         </tr>
         <?php foreach ($chResponse as $value) : ?>
+        <?php $daily = $value["daily"]["data"][0] ?>
         <tr>
             <td><?= $value["latitude"] . " / " . $value["longitude"] ?></td>
-            <td></td>
+            <td><?= $r = $daily["time"] ?></td>
         </tr>
         <?php endforeach; ?>
     </table>

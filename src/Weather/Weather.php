@@ -88,4 +88,10 @@ class Weather implements ContainerInjectableInterface
     {
         return $this->darkSkyApiKey;
     }
+
+
+    public function getIsLatLongValidInput()
+    {
+        return $this->isLatLongValidInput;
+    }
 }
