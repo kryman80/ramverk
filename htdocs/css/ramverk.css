@@ -6994,6 +6994,24 @@ p {
   text-align: left;
   word-break: break-word;
 }
+.table-weather {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-weather th {
+  padding: 0 10px 0 0;
+  text-align: left;
+}
+.table-weather td {
+  width: 100%;
+  padding: 20px 0 0;
+  text-align: left;
+}
+.weather-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
 /**
   * My settings.
   */
