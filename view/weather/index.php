@@ -24,11 +24,14 @@
 <?php if ($chResponse) : ?>
     <?php if (isset($chResponse[0]["code"]) == 400) : ?>
         <p class="error-message">The given location is invalid!</p>
-    <?php else : ?>    
+    <?php else : ?>
     <ul class="weather-list">
         <li>Latitude / Longitude: <?= $chResponse[0]["latitude"] . " / " . $chResponse[0]["longitude"] ?></li>
         <li>Timezone: <?= $chResponse[0]["timezone"] ?></li>        
-    </ul>    
+    </ul>
+
+    <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=<?= $longitude - 0.01 ?>%2C<?= $latitude ?>%2C<?= $longitude + 0.01 ?>%2C<?= $latitude ?>&amp;layer=mapnik&amp;marker=<?= $latitude ?>%2C<?= $longitude ?>" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=<?= $latitude ?>&amp;mlon=<?= $longitude ?>#map=16/<?= $latitude ?>/<?= $longitude ?>">View Larger Map</a></small>
+    
     <table class="table-weather">
         <tr>
             <th>Date</th>
