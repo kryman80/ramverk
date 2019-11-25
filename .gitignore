@@ -4,3 +4,4 @@
 memory::
 composer.lock
 .private
+/config/api_keys
