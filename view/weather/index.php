@@ -15,7 +15,7 @@
     <input type="submit" value="Submit" />
 </form>
 
-<?php if ($isInputValid == false) : ?>
+<?php if ($isInputValid === false) : ?>
 <p class="error-message">
     The format is wrong! <?= $latLong ?>
 </p>
@@ -23,7 +23,7 @@
 
 <?php if ($chResponse) : ?>
     <?php if (isset($chResponse[0]["code"]) == 400) : ?>
-        <p class="error-message">The given location is invalid!</p>
+        <p class="error-message"><?= $chResponse[0]["error"] . " " . $latLong ?></p>
     <?php else : ?>
     <ul class="weather-list">
         <li>Latitude / Longitude: <?= $chResponse[0]["latitude"] . " / " . $chResponse[0]["longitude"] ?></li>
@@ -44,25 +44,25 @@
             <th>Summary</th>
         </tr>
         <?php foreach ($chResponse as $value) : ?>        
-        
-        <?php
-            // Variables.
-            $daily = $value["daily"]["data"][0];
-            $date = date("Y/m/d H:i", $daily["time"]);
-            $appTempHigh = $daily["apparentTemperatureHigh"];
-            $appTempLow = $daily["apparentTemperatureLow"];
-            $appTempMax = $daily["apparentTemperatureMax"];
-            $appTempMin = $daily["apparentTemperatureMin"];
-            $icon = $daily["icon"] == "clear-day" ? "fas fa-sun" : (
-                $daily["icon"] == "clear-night" ? "fas fa-star" : (
-                    $daily["icon"] == "rain" ? "fas fa-cloud-rain" : (
-                        $daily["icon"] == "snow" ? "fas fa-snowflake" : (
-                            $daily["icon"] == "sleet" ? "fas fa-skating" : (
-                                $daily["icon"] == "wind" ? "fas fa-wind" : (
-                                    $daily["icon"] == "fog" ? "fas fa-smog" : (
-                                        $daily["icon"] == "cloudy" ? "fas fa-cloud" : (
-                                            $daily["icon"] == "partly-cloudy-day" ? "fas fa-cloud-sun" : (
-                                                $daily["icon"] == "partly-cloudy-night" ? "fas fa-cloud-moon" : $daily["icon"]
+            <?php
+                // Variables.
+                $daily = $value["daily"]["data"][0];
+                $date = date("Y/m/d H:i", $daily["time"]);
+                $appTempHigh = $daily["apparentTemperatureHigh"];
+                $appTempLow = $daily["apparentTemperatureLow"];
+                $appTempMax = $daily["apparentTemperatureMax"];
+                $appTempMin = $daily["apparentTemperatureMin"];
+                $icon = $daily["icon"] == "clear-day" ? "fas fa-sun" : (
+                    $daily["icon"] == "clear-night" ? "fas fa-star" : (
+                        $daily["icon"] == "rain" ? "fas fa-cloud-rain" : (
+                            $daily["icon"] == "snow" ? "fas fa-snowflake" : (
+                                $daily["icon"] == "sleet" ? "fas fa-skating" : (
+                                    $daily["icon"] == "wind" ? "fas fa-wind" : (
+                                        $daily["icon"] == "fog" ? "fas fa-smog" : (
+                                            $daily["icon"] == "cloudy" ? "fas fa-cloud" : (
+                                                $daily["icon"] == "partly-cloudy-day" ? "fas fa-cloud-sun" : (
+                                                    $daily["icon"] == "partly-cloudy-night" ? "fas fa-cloud-moon" : $daily["icon"]
+                                                )
                                             )
                                         )
                                     )
@@ -70,14 +70,12 @@
                             )
                         )
                     )
-                )
-            );
-            $ozone = $daily["ozone"];
-            $humidity = $daily["humidity"];
-            $windSpeed = $daily["windSpeed"];
-            $summary = $daily["summary"];
-        ?>
-        
+                );
+                $ozone = $daily["ozone"];
+                $humidity = $daily["humidity"];
+                $windSpeed = $daily["windSpeed"];
+                $summary = $daily["summary"];
+            ?>        
         <tr>
             <td><?= $date ?></td>
             <td><i class="<?= $icon ?>"></i></td>

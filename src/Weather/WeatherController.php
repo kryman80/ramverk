@@ -43,21 +43,25 @@ class WeatherController implements ContainerInjectableInterface
      */
     public function indexAction()
     {
-        $isLatLongValid = null;
+        $isLatLongFound = null;
         $chResponse = null;
-
+        
         if ($this->diRequest->getGet("weather")) {
             $this->latLong = $this->diRequest->getGet("weather");
 
             $chResponse = $this->diWeather->checkLatLongInput($this->latLong);
+            $isLatLongFound = isset($chResponse[0]["code"]) == 400 ? false : true;
+        } else if ($this->diRequest->getGet("weather") === "") {
+            $this->diWeather->setIsLatLongValidInput(false);
+            $this->latLong = "Empty string.";
         }
         
         $data = [
             "isInputValid" => $this->diWeather->getIsLatLongValidInput(),
             "latLong" => $this->latLong,
             "chResponse" => $chResponse,
-            "latitude" => $chResponse[0]["latitude"],
-            "longitude" => $chResponse[0]["longitude"],
+            "latitude" => $isLatLongFound ? $chResponse[0]["latitude"] : null,
+            "longitude" => $isLatLongFound ? $chResponse[0]["longitude"] : null,
         ];
 
         $this->diPage->add("weather/index", $data);
@@ -79,8 +83,8 @@ class WeatherController implements ContainerInjectableInterface
 
             if ($respFromInput) {
                 return [[ $respFromInput ]];
-            }            
-            $invalidInput = true;            
+            }
+            $invalidInput = true;
         } else if ($this->diRequest->getGet("weather-api") === "") {
             $invalidInput = true;
             $latLongInput = "Empty input.";

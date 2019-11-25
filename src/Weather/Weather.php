@@ -48,7 +48,7 @@ class Weather implements ContainerInjectableInterface
             CURLOPT_RETURNTRANSFER => true,
         ];
         
-        $url = "{$this->darkSkyApiUrl}/{$latLong}";        
+        $url = "{$this->darkSkyApiUrl}/{$latLong}";
         $curlHandlers = [];
         
         $mh = curl_multi_init();
@@ -104,6 +104,14 @@ class Weather implements ContainerInjectableInterface
 
     public function getIsLatLongValidInput()
     {
+        return $this->isLatLongValidInput;
+    }
+
+
+    public function setIsLatLongValidInput($value)
+    {
+        $this->isLatLongValidInput = $value;
+
         return $this->isLatLongValidInput;
     }
 }
