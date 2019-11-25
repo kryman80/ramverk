@@ -44,14 +44,13 @@ class Weather implements ContainerInjectableInterface
 
     public function checkLatLongWeather($latLong)
     {
-        // var_dump($latLong);
-        
         $chSetOptions = [
             CURLOPT_RETURNTRANSFER => true,
         ];
-
-        $url = "{$this->darkSkyApiUrl}/{$latLong}";
+        
+        $url = "{$this->darkSkyApiUrl}/{$latLong}";        
         $curlHandlers = [];
+        
         $mh = curl_multi_init();
 
         for ($i = 1; $i <= 30; $i++) {
@@ -81,6 +80,19 @@ class Weather implements ContainerInjectableInterface
         curl_multi_close($mh);
 
         return $chResponseList;
+    }
+
+
+    public function checkJSONInput($latLong)
+    {
+        $isJsonStringFound = substr_count($latLong, "json ");
+        
+        if ($isJsonStringFound) {
+            $latLong = str_replace("json ", "", $latLong);
+            return $this->checkLatLongInput($latLong);
+        } else {
+            return $isJsonStringFound;
+        }
     }
 
 

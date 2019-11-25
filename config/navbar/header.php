@@ -73,5 +73,10 @@ return [
             "url" => "weather",
             "title" => "Get information about weather prognoses.",
         ],
+        [
+            "text" => "Weather Prognose API",
+            "url" => "weather/api",
+            "title" => "Get information about weather prognoses in JSON format.",
+        ],
     ],
 ];

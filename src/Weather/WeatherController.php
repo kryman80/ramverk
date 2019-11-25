@@ -51,11 +51,7 @@ class WeatherController implements ContainerInjectableInterface
 
             $chResponse = $this->diWeather->checkLatLongInput($this->latLong);
         }
-        // $a = json_decode(json_encode($chResponse));
-        // var_dump($chResponse[0]["longitude"] - 2);
-        // foreach ($chResponse as $key => $value) {
-        //     var_dump($value);
-        // }
+        
         $data = [
             "isInputValid" => $this->diWeather->getIsLatLongValidInput(),
             "latLong" => $this->latLong,
@@ -68,6 +64,37 @@ class WeatherController implements ContainerInjectableInterface
         
         return $this->diPage->render([
             "title" => $this->title,
+        ]);
+    }
+
+
+    public function apiAction()
+    {
+        $invalidInput = false;
+        $latLongInput = null;
+        
+        if ($this->diRequest->getGet("weather-api")) {
+            $latLongInput = $this->diRequest->getGet("weather-api");
+            $respFromInput = $this->diWeather->checkJSONInput($latLongInput);
+
+            if ($respFromInput) {
+                return [[ $respFromInput ]];
+            }            
+            $invalidInput = true;            
+        } else if ($this->diRequest->getGet("weather-api") === "") {
+            $invalidInput = true;
+            $latLongInput = "Empty input.";
+        }
+
+        $data = [
+            "invalidInput" => $invalidInput,
+            "input" => $latLongInput,
+        ];
+
+        $this->diPage->add("weather/api", $data);
+
+        return $this->diPage->render([
+            "title" => "Rest API getting the weather prognose",
         ]);
     }
 }
