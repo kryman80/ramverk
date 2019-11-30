@@ -8,10 +8,19 @@
         "psr-4": {"Anax\\": "src/"},
 		"files": ["src/functions.php"]
     },
+
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/kryman80/weather"
+		}
+	],
+
     "require": {
         "anax/anax-ramverk1-me": "^1.0.0",
-        "anax/remserver": "^2.1",
-        "anax/anax-cli": "^1.2"
+        "anax/remserver": "dev-master",
+        "anax/anax-cli": "^1.2",
+		"kryman80/weather": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"
