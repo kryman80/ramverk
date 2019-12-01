@@ -11,7 +11,7 @@
 
     "require": {
         "anax/anax-ramverk1-me": "^1.0.0",
-        "anax/remserver": "dev-master",
+        "anax/remserver": "^2",
         "anax/anax-cli": "^1.2",
 		"kryman80/weather": "^1"
     },
