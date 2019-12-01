@@ -18,7 +18,7 @@ class WeatherControllerTest extends TestCase
     {
         global $di;
 
-        // Setup di.        
+        // Setup di.
         $this->di = new DIFactoryConfig();
         $this->di->loadServices(ANAX_INSTALL_PATH . "/config/di");
 
@@ -81,7 +81,7 @@ class WeatherControllerTest extends TestCase
         $headers = $this->diRes->getHeaders();
         $this->assertArraySubset(["Content-Type: application/json; charset=utf8"], $headers);
 
-        // 1.2 Test if body response is correct 
+        // 1.2 Test if body response is correct
         // error message presented from wrong input.
         $this->diReq->setGet("weather-api", "");
         $this->controller->apiAction();
