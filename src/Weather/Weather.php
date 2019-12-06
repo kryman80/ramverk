@@ -20,8 +20,28 @@ class Weather implements ContainerInjectableInterface
 
     public function __construct()
     {
-        $this->darkSkyApiKey = json_decode(file_get_contents(ANAX_INSTALL_PATH . "/config/api_keys"));
-        $this->darkSkyApiUrl = "https://api.darksky.net/forecast/{$this->darkSkyApiKey->dark_sky_api}";
+        $this->fetchApiKey();
+
+        $this->darkSkyApiUrl = "https://api.darksky.net/forecast/{$this->darkSkyApiKey}";
+    }
+
+
+    public function fetchApiKey()
+    {
+        $apiFile = json_decode(file_get_contents(ANAX_INSTALL_PATH . "/config/api_keys"));
+        $ch = curl_init($apiFile->dark_sky_api);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $replaceSubstrings = [
+            "{" => "", 
+            "}" => "",
+            '"' => "",
+            "dark_sky_api" => "",
+            " " => "",
+            ":" => "",
+            "\n" => ""
+        ];
+        $this->darkSkyApiKey = strtr(curl_exec($ch), $replaceSubstrings);        
+        curl_close($ch);
     }
 
 
@@ -98,7 +118,7 @@ class Weather implements ContainerInjectableInterface
 
     public function getDarkSkyApiKey()
     {
-        return $this->darkSkyApiKey->dark_sky_api;
+        return $this->darkSkyApiKey;
     }
 
 
