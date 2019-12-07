@@ -32,7 +32,7 @@ class Weather implements ContainerInjectableInterface
         $ch = curl_init($apiFile->dark_sky_api);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $replaceSubstrings = [
-            "{" => "", 
+            "{" => "",
             "}" => "",
             '"' => "",
             "dark_sky_api" => "",
@@ -40,7 +40,7 @@ class Weather implements ContainerInjectableInterface
             ":" => "",
             "\n" => ""
         ];
-        $this->darkSkyApiKey = strtr(curl_exec($ch), $replaceSubstrings);        
+        $this->darkSkyApiKey = strtr(curl_exec($ch), $replaceSubstrings);
         curl_close($ch);
     }
 

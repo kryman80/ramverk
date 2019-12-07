@@ -99,9 +99,22 @@ class WeatherControllerTest extends TestCase
         // 1.4 Test API key is the same as in API URL.
         $this->diReq->setGet("weather-api", "json 42.3601,-71.0589");
         $this->controller->apiAction();
-        $apiKey = json_decode(file_get_contents(ANAX_INSTALL_PATH . "/config/api_keys"));
+        $apiFile = json_decode(file_get_contents(ANAX_INSTALL_PATH . "/config/api_keys"));
+        $ch = curl_init($apiFile->dark_sky_api);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $replaceSubstrings = [
+            "{" => "",
+            "}" => "",
+            '"' => "",
+            "dark_sky_api" => "",
+            " " => "",
+            ":" => "",
+            "\n" => ""
+        ];
+        $apiKey = strtr(curl_exec($ch), $replaceSubstrings);
+        curl_close($ch);
         $weather = $this->di->get("weather");
         $weatherApiKey = $weather->getDarkSkyApiKey();
-        $this->assertStringContainsString($apiKey->dark_sky_api, $weatherApiKey);
+        $this->assertStringContainsString($apiKey, $weatherApiKey);
     }
 }
