@@ -10,7 +10,7 @@ return [
             "shared" => true,
             "callback" => function () {
                 $weather = new \Anax\Weather\Weather();
-                $weather->setDI($this);
+                // $weather->setDI($this);
                 return $weather;
             }
         ],

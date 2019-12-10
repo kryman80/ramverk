@@ -3,5 +3,5 @@
 /vendor
 memory::
 composer.lock
-.private
+#.private
 /config/api_keys

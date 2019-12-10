@@ -2,15 +2,15 @@
 
 namespace Anax\Weather;
 
-use Anax\Commons\ContainerInjectableInterface;
-use Anax\Commons\ContainerInjectableTrait;
+// use Anax\Commons\ContainerInjectableInterface;
+// use Anax\Commons\ContainerInjectableTrait;
 
 /**
  * Class for the weather API service.
  */
-class Weather implements ContainerInjectableInterface
+class Weather
 {
-    use ContainerInjectableTrait;
+    // use ContainerInjectableTrait;
 
     
     private $isLatLongValidInput;
