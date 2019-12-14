@@ -17,7 +17,7 @@ $urlToView = url("book");
 
 
 
-?><h1>Update an item</h1>
+?><h1>Update a book</h1>
 
 <?= $form ?>
 

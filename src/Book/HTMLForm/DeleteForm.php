@@ -22,12 +22,12 @@ class DeleteForm extends FormModel
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Delete an item",
+                "legend" => "Delete a book",
             ],
             [
                 "select" => [
                     "type"        => "select",
-                    "label"       => "Select item to delete:",
+                    "label"       => "Select book to delete:",
                     "options"     => $this->getAllItems(),
                 ],
 
@@ -54,7 +54,7 @@ class DeleteForm extends FormModel
 
         $books = ["-1" => "Select an item..."];
         foreach ($book->findAll() as $obj) {
-            $books[$obj->id] = "{$obj->column1} ({$obj->id})";
+            $books[$obj->id] = "{$obj->title} ({$obj->id})";
         }
 
         return $books;

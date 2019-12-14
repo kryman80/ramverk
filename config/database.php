@@ -28,7 +28,7 @@ if ($_SERVER["SERVER_NAME"] === "www.student.bth.se") {
     
         // True to be verbose on connection failed
         "debug_connect"   => false,
-    ];    
+    ];
 }
 
 return [
