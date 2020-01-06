@@ -25,7 +25,7 @@
 -- Ensure UTF8 on the database connection
 SET NAMES utf8;
 
-
+use test;
 
 --
 -- Table Book
